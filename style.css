@@ -20,7 +20,7 @@ body {
 }
 .grid > button {
   cursor: pointer;
-  font-size: 40px;
+  font-size: 40 px;
   border: 1px solid white;
   outline: none;
   background-color: rgba(255, 255, 255, 0.75);
@@ -34,10 +34,9 @@ body {
   grid-column: 1/-1;
   background-color: rgba(0, 0, 0, 0.75);
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-around;
   flex-direction: column;
-  padding: 10px;
   word-wrap: break-word;
   word-break: break-all;
   color: white;

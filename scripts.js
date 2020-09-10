@@ -4,7 +4,7 @@ Assingtment in Javaclass sept 2020
 */
 
 (function () {
-  //Writes appname
+  // writes appname
   document
     .querySelector("#app")
     .addEventListener(
@@ -12,7 +12,7 @@ Assingtment in Javaclass sept 2020
       () => (document.querySelector(".output").innerHTML = navigator.appName)
     );
 
-  //writes geolocation
+  // writes geolocation
   function geoPos(position) {
     document.querySelector(".output").innerHTML =
       "Latitude: " +
@@ -30,7 +30,7 @@ Assingtment in Javaclass sept 2020
     }
   });
 
-  //writes what's in clipboard
+  // writes what's in clipboard
   document.querySelector("#clip").addEventListener("click", () => {
     navigator.clipboard
       .readText()
@@ -39,9 +39,61 @@ Assingtment in Javaclass sept 2020
       );
   });
 
-  /* Skapa en funktion som returnerar ett Promise som både resolvar och rejectar.
- - Kör din Promise-funktion med async/await och skriv ut vad den resolvar. 
- - Kör din Promise-funktion när den resolvar och skriv ut på sajten mha .then()
- - Kör din Promise-funktion när den rejectar och skriv ut på sajten mha .catch()
- */
+  // promise
+  let promise = null;
+  let isDanielHappy = null;
+
+  function willShowPromise() {
+    return new Promise((resolve, reject) => {
+      if (isDanielHappy) {
+        let answer = "Your function was fulfilled.";
+        resolve(answer); //fulfilled
+      } else {
+        let reason = new Error("Your function was rejected.");
+        reject(reason); // reject
+      }
+    });
+  }
+
+  // async function
+  async function asyncFunction() {
+    isDanielHappy = confirm("Should function work?");
+    try {
+      promise = await willShowPromise();
+      document.querySelector(".output").innerHTML = promise;
+    } catch (err) {
+      document.querySelector(".output").innerHTML = err.message;
+    }
+  }
+
+  // uses then & catch error
+  let getPromise = function () {
+    promise
+      .then(function (fulfilled) {
+        document.querySelector(".output").innerHTML = fulfilled;
+      })
+      .catch(function (error) {
+        document.querySelector(".output").innerHTML = error.message;
+      });
+  };
+
+  // let user choose if work or not
+  // async/await
+  document.querySelector("#function").addEventListener("click", () => {
+    asyncFunction();
+  });
+
+  // will show resolved answer
+  document.querySelector("#then").addEventListener("click", () => {
+    isDanielHappy = true;
+    promise = willShowPromise();
+    getPromise();
+  });
+
+  // wills show rejected answer
+  document.querySelector("#catch").addEventListener("click", () => {
+    isDanielHappy = false;
+    promise = willShowPromise();
+    getPromise();
+  });
 })();
